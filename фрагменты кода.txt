@@ -1,0 +1,163 @@
+SHOW TABLES;
+DESCRIBE pet;
+DROP TABLE IF EXISTS;
+CREATE TABLE IF NOT EXISTS pet (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+INSERT INTO `pet` (`name`, `owner`, `species`, `sex`, `birth`, `death`) VALUES
+('Fluffy', 'Harold', 'cat', 'f', '1993-02-04', NULL),
+('Claws', 'Gwen', 'cat', 'm', '1994-03-17', NULL),
+('Buffy', 'Harold', 'dog', 'f', '1989-05-13', NULL),
+('Fang', 'Benny', 'dog', 'm', '1990-08-27', NULL),
+('Bowser', 'Diane', 'dog', 'm', '1979-08-31', '1995-07-29'),
+('Chirpy', 'Gwen', 'bird', 'f', '1998-09-11', NULL),
+('Whistler', 'Gwen', 'bird', NULL, '1997-12-09', NULL),
+('Slim', 'Benny', 'snake', 'm', '1996-04-29', NULL),
+('Chirpy', 'Gwen', 'bird', 'f', '1998-09-11', NULL),
+('Whistler', 'Gwen', 'bird', NULL, '1997-12-09', NULL),
+('Slim', 'Benny', 'snake', 'm', '1996-04-29', NULL);
+SELECT * FROM `pet`;
+INSERT INTO pet
+       VALUES ('ginger', 'Пушок','Пушков','hamster','f','1999-03-30',NULL);
+
+CREATE DATABASE `g03u55`;
+USE `g03u55`;
+DROP TABLE IF EXISTS `g03u55_pet`;
+CREATE TABLE IF NOT EXISTS `g03u55_pet` (
+    `g03u55_name` VARCHAR(20) NOT NULL DEFAULT '',
+    `g03u55_owner`   ENUM('Harold', 'Gwen', 'Benny', 'Diane'),
+    `g03u55_species` VARCHAR(20) DEFAULT NULL,
+    `g03u55_sex` CHAR(1) DEFAULT NULL,
+    `g03u55_birth` DATE DEFAULT NULL,
+    `g03u55_death` DATE DEFAULT NULL
+);
+DESCRIBE `g03u55_pet`;
+
+ALTER TABLE `g01u00`.`pet_2` 
+CHANGE COLUMN `name` `g03u55_name` VARCHAR(20) NULL DEFAULT NULL ,
+CHANGE COLUMN `owner` `g03u55_owner` VARCHAR(20) NULL DEFAULT NULL ,
+CHANGE COLUMN `species` `g03u55_species` VARCHAR(20) NULL DEFAULT NULL ,
+CHANGE COLUMN `sex` `g03u55_sex` CHAR(1) NULL DEFAULT NULL ,
+CHANGE COLUMN `birth` `g03u55_birth` DATE NULL DEFAULT NULL ,
+CHANGE COLUMN `death` `g03u55_death` DATE NULL DEFAULT NULL , RENAME TO  `g01u00`.`g03u55_pet` ;
+
+полное создание таблицы (и просмотр потом):
+INSERT INTO `g03u55_pet` (`id`, `g03u55_name`, `g03u55_owner`, `g03u55_species`, `g03u55_sex`, `g03u55_birth`, `g03u55_death`) VALUES
+(NULL, 'Fluffy', 'Harold', 'cat', 'f', '1993-02-04', NULL),
+(NULL, 'Claws', 'Gwen', 'cat', 'm', '1994-03-17', NULL),
+(NULL, 'Buffy', 'Harold', 'dog', 'f', '1989-05-13', NULL),
+(NULL, 'Fang', 'Benny', 'dog', 'm', '1990-08-27', NULL),
+(NULL, 'Bowser', 'Diane', 'dog', 'm', '1979-08-31', '1995-07-29'),
+(NULL, 'Chirpy', 'Gwen', 'bird', 'f', '1998-09-11', NULL),
+(NULL, 'Whistler', 'Gwen', 'bird', NULL, '1997-12-09', NULL),
+(NULL, 'Slim', 'Benny', 'snake', 'm', '1996-04-29', NULL),
+(NULL, 'Chirpy', 'Gwen', 'bird', 'f', '1998-09-11', NULL),
+(NULL, 'Whistler', 'Gwen', 'bird', NULL, '1997-12-09', NULL),
+(NULL, 'Slim', 'Benny', 'snake', 'm', '1996-04-29', NULL);
+SELECT * FROM `g03u55_pet`;
+
+выбрать всех, кто змея и птичка, и показать определенные столбцы:
+SELECT `id`, `g03u55_name`, `g03u55_owner`, `g03u55_species`
+	FROM g03u55_pet WHERE g03u55_species = 'snake' OR g03u55_species = 'bird';
+
+CREATE TABLE `g01u00`.`g03u55_goods` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `g03u55_name` VARCHAR(45) NULL,
+  `g03u55_quantity` VARCHAR(45) NULL,
+  `g03u55_price` FLOAT NULL,
+  `g03u55_discount` TINYINT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `g01u00`.`g03u55_goods` (`g03u55_name`, `g03u55_quantity`, `g03u55_price`, `g03u55_discount`) VALUES ('T-shirt', '500', '650', 'yes');
+INSERT INTO `g01u00`.`g03u55_goods` (`g03u55_name`, `g03u55_quantity`, `g03u55_price`, `g03u55_discount`) VALUES ('pen', '380', '28', 'no');
+
+
+SELECT * FROM g03u55_goods;
+INSERT INTO `g03u55_goods` (`id`, `g03u55_name`, `g03u55_quantity`, `g03u55_price`, `g03u55_discount`) VALUES 
+(NULL, 'T-shirt', '500', '650', 'yes'),
+(NULL, 'pen', '380', '28', 'no');
+
+на будущее:
+SELECT `id`, `g03u55_type`, `g03u55_name`, `g03u55_price`
+	FROM g03u55_pet WHERE g03u55_discount = 'T-shirt' OR g03u55_species = 'pen';
+
+CREATE TABLE `g01u00`.`g03u55_goods` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `g03u55_type` VARCHAR(45) NULL,
+  `g03u55_name` VARCHAR(45) NULL,
+  `g03u55_quantity` VARCHAR(45) NULL,
+  `g03u55_price` FLOAT NULL,
+  `g03u55_discount` BOOLEAN NULL,
+  PRIMARY KEY (`id`));
+DESCRIBE g01u00.g03u55_goods;
+SELECT * FROM g03u55_goods;
+INSERT INTO `g03u55_goods` (`id`, `g03u55_name`, `g03u55_quantity`, `g03u55_price`, `g03u55_discount`) VALUES 
+(NULL, 'T-shirt', '500', '650', '1'),
+(NULL, 'pen', '380', '28', '0');
+SELECT * FROM g03u55_goods;
+
+полное создание таблицы с запросами:
+DROP TABLE IF EXISTS `g03u55_goods`;
+CREATE TABLE `g01u00`.`g03u55_goods` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `g03u55_type` VARCHAR(45) NULL,
+  `g03u55_name` VARCHAR(45) NULL,
+  `g03u55_quantity` VARCHAR(45) NULL,
+  `g03u55_price` VARCHAR(45) NULL,
+  `g03u55_discount` FLOAT NULL,
+  PRIMARY KEY (`id`));
+DESCRIBE g01u00.g03u55_goods;
+SELECT * FROM g03u55_goods;
+INSERT INTO `g03u55_goods` (`id`, `g03u55_type`, `g03u55_name`, `g03u55_quantity`, `g03u55_price`, `g03u55_discount`) VALUES 
+(NULL, 'T-shirt', 'Penguin white', '500', '650', '0'),
+(NULL, 'cup', 'Penguin sleepy', '300', '300', '15'),
+(NULL, 'T-shirt', 'Penguin blue', '480', '650', '20'),
+(NULL, 'pen', 'Beautiful', '400', '25', '0'),
+(NULL, 'T-shirt', 'Penguin small', '525', '650', '20'),
+(NULL, 'pen', 'Save them', '380', '28', '0'),
+(NULL, 'pen', 'Feed me', '200', '30', '10'),
+(NULL, 'cup', 'Snowman', '240', '300', '15'),
+(NULL, 'cup', 'Winter', '280', '300', '0'),
+(NULL, 'T-shirt', 'Penguin funny', '490', '650', '0'),
+(NULL, 'cup', 'Save', '310', '300', '15');
+SELECT * FROM g03u55_goods;
+#выбрать столбцы с типом, названием и ценой
+SELECT `id`, `g03u55_type`, `g03u55_name`, `g03u55_price`
+	FROM g03u55_goods;
+#выбрать столбцы с типом, количеством, ценой и скидкой
+SELECT `id`, `g03u55_type`, `g03u55_quantity`, `g03u55_price`, `g03u55_discount`
+	FROM g03u55_goods;
+#выбрать все футболки и ручки и упорядочить по цене
+SELECT `id`, `g03u55_type`, `g03u55_name`, `g03u55_price`
+	FROM g03u55_goods WHERE g03u55_type = 'T-shirt' OR g03u55_type = 'pen'
+    ORDER BY g03u55_price;
+#выбрать столбцы с типом, названием, количеством, ценой, посчитать и вывести все + столбец с ценой с учетом скидки, где она есть
+SELECT id, g03u55_type, g03u55_name, g03u55_quantity, g03u55_price,
+       g03u55_price - g03u55_price * (g03u55_discount / 100) AS g03u55_new_price
+       FROM g03u55_goods 
+       WHERE g03u55_discount > 0
+       ORDER BY id;
+#выбрать столбцы с типом, названием, количеством, сортировать по количеству
+SELECT id, g03u55_type, g03u55_name, g03u55_quantity 
+		FROM g03u55_goods ORDER BY g03u55_quantity;
+#выбрать столбцы с типом, названием, количеством, ценой и скидкой, посчитать 2 новых столбца с размером скидки и новой ценой и вывести, где скидка есть
+SELECT id, g03u55_type, g03u55_name, g03u55_quantity, g03u55_price, g03u55_discount,
+       g03u55_price * (g03u55_discount / 100) AS g03u55_discount_value,
+       g03u55_price - g03u55_price * (g03u55_discount / 100) AS g03u55_new_price 
+       FROM g03u55_goods
+       WHERE g03u55_discount > 0
+       ORDER BY g03u55_discount_value DESC;
+#выбрать столбцы с типом, названием и ценой, где цена больше 20 ден.ед.
+SELECT `id`, `g03u55_type`, `g03u55_name`, `g03u55_price`
+	FROM g03u55_goods
+    WHERE `g03u55_price` LIKE '___' OR `g03u55_price` NOT LIKE '2_';
+#выбрать столбцы с типом, посчитать и вывести минимальную цену 
+SELECT `g03u55_type`, 
+	MIN(g03u55_price) AS g03u55_min_price
+	FROM g03u55_goods
+    GROUP BY `g03u55_type`;
+#выбрать столбцы с типом, посчитать и вывести количество видов товара каждого типа и сортировать по алфавиту
+SELECT `g03u55_type`, 
+COUNT(*) AS g03u55_type_quantity
+	FROM g03u55_goods
+    GROUP BY `g03u55_type`
+    ORDER BY `g03u55_type`;
